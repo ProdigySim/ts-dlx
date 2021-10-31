@@ -22,17 +22,6 @@ export type DLXNode = {
 type HorizontallyLinkedNode = DLXNode | DLXHeadNode | DLXBoardHead;
 type VerticallyLinkedNode = DLXNode | DLXHeadNode;
 
-function debugPrintHead(column: DLXHeadNode) {
-  console.log(`${column.id} has ${column.size} nodes`);
-}
-function debugPrintNode(node: DLXNode) {
-  console.log(
-    `Node is a member of columns ${node.head.id} with ${
-      node.head.size - 1
-    } other nodes`,
-  );
-}
-
 export function unlinkVertically<T extends VerticallyLinkedNode>(node: T): T {
   node.up.down = node.down;
   node.down.up = node.up;
@@ -117,15 +106,12 @@ export function toSparseMatrix(boardHead: DLXBoardHead): number[][] {
       if(visitedNodes.has(node)) break;
       const row: number[] = new Array(columns.length).fill(0);
       row[node.head.id] = 1;
-      let count = 1;
       visitedNodes.add(node);
       for(const neighbor of getHorizontalNodesExcept(node)) {
         // console.log(`Neighbor @ col ${neighbor.head.id} (id: ${neighbor.id})`);
         row[neighbor.head.id] = 1;
         visitedNodes.add(neighbor);
-        count++;
       }
-      console.log(count);
       results.push(row);
     }
   }
