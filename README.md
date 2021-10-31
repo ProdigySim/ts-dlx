@@ -88,6 +88,7 @@ The solver runs the following process recursively:
 ### TODO
 
 - Move sudoku solver to unit tests
+- Yield all solutions instead of just the first one found.
 - Build N-queens solver
 - Generically support multiple sizes of sudoku in sudoku solver
 - Export core DLX components as a library.
